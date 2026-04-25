@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilo_cont.css">
+    <link rel="stylesheet" href="css/estilo_nav.css">
+    <script src="javaScript/registroJs.js" defer></script>
+    <title>roomie</title>
+</head>
+<body>
+    
+    <div class="navegador">
+        <img src="img/logo.png" alt="" >
+
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Buscar</a></li>
+            <li><a href="login.html" class="btn_inicio">Iniciar Sesión</a></li>
+            <li><a href="registro.html" class="btn_registro">Registrarse</a></li>
+        </ul>
+    </div>
+
+    <div class="contenedor">
+        <img src="img/logo.png" alt="">
+        <h1>Crea tu cuenta gratis</h1>
+        <p class="gris">¿Cómo quieres usar Roomie?</p>
+        <br><br>
+
+        <div class="opcion">
+            <button id="botonInquilino" class="botonNormal botonPulsado">
+                🎓<br>
+                Soy Inquilino
+            </button>
+
+            <button id="botonArrendador" class="botonNormal">
+                🏡<br>
+                Soy arrendador
+            </button>
+        </div>
+
+        <div class="formu">
+            <form action="#" method="get">
+                <label for="">Nombre</label><br>
+                <input type="text" name="" id="nombre" placeholder="Tu nombre" required><br>
+                
+                <label for="">Apellidos</label><br>
+                <input type="text" name="" id="apellidos" placeholder="Tus apellidos" required><br>
+
+                <label for="">Correo electrónico</label><br>
+                <input type="email" name="" id="email" placeholder="tu@email.com" required><br>
+
+                <label for="">Teléfono</label><br>
+                <input type="tel" name="" id="telefono" placeholder="+34 600 000 000" required><br>
+
+                <label for="">Contraseña</label><br>
+                <input type="password" name="" id="pwd" placeholder="Mínimo 8 carácteres" required><br>
+
+                <label for="">Repetir contraseña</label><br>
+                <input type="password" name="" id="pwd_confirm" placeholder="Repite contraseña" required><br><br>
+
+                
+            </form>
+
+            <div class="politica">
+                <input type="checkbox" name="" id="confirm" required>
+                <label for="">Acepto los Términos y condiciones y la Política de privacidad</label>
+            </div>
+          
+            <button id="crear">Crear cuenta gratis</button>
+        </div>
+        
+    </div>
+    
+
+    
+
+
+</body>
+</html>

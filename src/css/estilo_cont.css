@@ -1,0 +1,102 @@
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    width: 700px;
+    background-color: white;
+    font-family: 'Outfit',sans-serif;
+    padding: 20px 0px 20px 0px;
+    box-shadow: 0px 0px 10px 2px gray;
+}
+
+.contenedor img{
+    margin: 15px;
+    max-width: 40%;
+    
+}
+
+.contenedor h1{
+    font-size: 45px;
+    max-width: 60%;
+    text-align: center;
+    margin: 5px;
+}
+
+.gris{
+    color: grey;
+    font-size: 15px
+}
+
+.opcion{
+    display: flex;
+    justify-content: space-between;
+}
+
+.botonNormal{
+    font-family: inherit;
+    color: #3C7160;
+    font-weight: bold;
+
+    font-size: 15px;
+
+    padding: 40px;
+    margin: 10px;
+    width: 250px;
+    border-radius: 12px;
+    border: solid #3C7160 2px ;
+
+    cursor: pointer;
+}
+
+.opcion button:hover{
+    background-color: #d2ebe2;
+}
+
+.botonPulsado{
+    background-color: #d2ebe2;
+}
+
+.formu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.formu form input{
+    border: solid rgb(184, 184, 184) 1px;
+    border-radius: 16px;
+
+    padding: 10px;
+    margin: 5px;
+
+    width: 450px;
+
+    font-size: 15px;
+}
+
+#crear{
+    width: 90%;
+    background-color: #3C7160;
+    color: white;
+    padding: 20px;
+    margin: 20px;
+
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#crear:hover{
+    background-color: #d2ebe2;
+    color: #3C7160;
+}
+
+.enlace {
+    color: #3C7160;
+    font-weight: bold;
+    text-decoration: none;
+}
