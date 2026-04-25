@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Arrendador – Roomie</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        .panel-container {
+            max-width: 1000px;
+            margin: 120px auto 40px;
+            padding: 0 24px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .room-form {
+            background: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+            border: 1px solid var(--gray-100);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .my-rooms-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .my-room-item {
+            background: var(--white);
+            padding: 16px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--gray-100);
+        }
+
+        .my-room-item-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .my-room-item-title {
+            font-weight: 700;
+            color: var(--teal-dark);
+            font-size: 1.1rem;
+        }
+
+        .my-room-item-address {
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+
+        .my-room-item-price {
+            font-weight: 700;
+            color: var(--teal);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="Roomie" class="logo-img" />
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="buscar.html" class="nav-link">Buscar</a></li>
+                <li id="navAuth">
+                    <a href="login.html" class="btn btn-outline">Iniciar sesión</a>
+                    <a href="registro.html" class="btn btn-primary" style="margin-left:8px;">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="panel-container" style="background: transparent;">
+        <div class="panel-header" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+            <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--teal-dark);">🏡 Panel de Control</h1>
+            <p style="color: var(--gray-500); margin-bottom: 20px;">Gestiona tus propiedades de forma rápida y sencilla
+            </p>
+        </div>
+
+        <div class="room-form" id="roomFormContainer"
+            style="background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+            <h3
+                style="margin-bottom: 24px; color: var(--teal); font-weight: 700; border-bottom: 2px solid var(--teal-pale); padding-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+                <span
+                    style="background: var(--teal); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;">+</span>
+                Publicar nueva habitación
+            </h3>
+            <form id="addRoomForm">
+                <div class="form-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div style="grid-column: span 2;">
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Título
+                            del anuncio</label>
+                        <input type="text" id="rTitulo" class="input-form"
+                            placeholder="Ej: Preciosa habitación junto a la Universidad" required
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; transition: all 0.3s; font-family: inherit;">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Dirección
+                            exacta</label>
+                        <input type="text" id="rDireccion" class="input-form" placeholder="Calle Ejemplo, 12, 3ºB"
+                            required
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; font-family: inherit;">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Ciudad
+                            / Zona</label>
+                        <input type="text" id="rZona" class="input-form" placeholder="Ej: Centro · Madrid" required
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; font-family: inherit;">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Precio
+                            mensual (€)</label>
+                        <input type="number" id="rPrecio" class="input-form" placeholder="450" required
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; font-family: inherit;">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Tipo
+                            de habitación</label>
+                        <select id="rTipo" class="input-form"
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; background: white; cursor: pointer; font-family: inherit;">
+                            <option value="individual">Habitación Individual</option>
+                            <option value="compartida">Habitación Compartida</option>
+                            <option value="estudio">Estudio / Loft</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Latitud
+                            (coordenada)</label>
+                        <input type="number" step="any" id="rLat" class="input-form" placeholder="Ej: 40.4168"
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; font-family: inherit;">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Longitud
+                            (coordenada)</label>
+                        <input type="number" step="any" id="rLng" class="input-form" placeholder="Ej: -3.7038"
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; font-family: inherit;">
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Descripción
+                            detallada</label>
+                        <textarea id="rDesc" class="input-form"
+                            placeholder="Describe los muebles, el ambiente del piso, servicios incluidos..." required
+                            style="width: 100%; padding: 14px 18px; border-radius: var(--radius-md); border: 2px solid var(--gray-100); outline: none; min-height: 120px; resize: vertical; font-family: inherit; font-size: 0.95rem;"></textarea>
+                    </div>
+
+                    <!-- SECCIÓN DE FOTOS -->
+                    <div style="grid-column: span 2; margin-top: 10px;">
+                        <label
+                            style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--gray-700);">Fotos
+                            de la habitación</label>
+                        <div id="photoDropzone"
+                            style="border: 2px dashed var(--gray-300); padding: 40px; border-radius: var(--radius-lg); text-align: center; background: rgba(241, 245, 249, 0.5); cursor: pointer; transition: all 0.3s; position: relative;">
+                            <span style="font-size: 3rem; display: block; margin-bottom: 12px;">📸</span>
+                            <p style="margin-bottom: 5px; font-weight: 700; color: var(--dark);">Sube fotos reales</p>
+                            <p style="font-size: 0.85rem; color: var(--gray-500);">Haz clic aquí para seleccionar
+                                imágenes (JPG, PNG)</p>
+                            <input type="file" id="rPhotoInput" multiple accept="image/*"
+                                style="opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;">
+                        </div>
+                        <div id="photoPreviewContainer"
+                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; margin-top: 20px;">
+                            <!-- Previews aquí -->
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="display: flex; justify-content: flex-end; margin-top: 30px; border-top: 1px solid var(--gray-100); padding-top: 25px;">
+                    <button type="submit" class="btn btn-primary"
+                        style="padding: 16px 48px; font-size: 1.05rem; box-shadow: var(--shadow-teal); border-radius: 50px;">🚀
+                        Publicar Anuncio</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div
+            style="display: flex; gap: 20px; margin-bottom: 24px; border-bottom: 1px solid var(--gray-200); padding-bottom: 10px;">
+            <button id="tabActive" class="tab-btn active" onclick="switchPanelTab('active')"
+                style="background:none; border:none; padding:10px 20px; font-weight:700; cursor:pointer; color:var(--teal); border-bottom:3px solid var(--teal); transition:all 0.3s;">
+                📋 Anuncios Activos
+            </button>
+            <button id="tabHistory" class="tab-btn" onclick="switchPanelTab('history')"
+                style="background:none; border:none; padding:10px 20px; font-weight:600; cursor:pointer; color:var(--gray-500); border-bottom:3px solid transparent; transition:all 0.3s;">
+                📜 Historial Completo
+            </button>
+        </div>
+
+        <!-- SECCIÓN: ANUNCIOS ACTIVOS -->
+        <div id="activeRoomsSection">
+            <h3 style="margin-bottom: 16px; color: var(--dark); font-size: 1.1rem;">Estas son tus habitaciones visibles
+                actualmente</h3>
+            <div class="my-rooms-grid" id="myRoomsGrid">
+                <!-- Las habitaciones activas aparecerán aquí -->
+            </div>
+        </div>
+
+        <!-- SECCIÓN: HISTORIAL (Oculta por defecto) -->
+        <div id="historySection" style="display: none;">
+            <h3 style="margin-bottom: 16px; color: var(--dark); font-size: 1.1rem;">Registro histórico de todas tus
+                publicaciones</h3>
+            <div class="my-rooms-grid" id="historyGrid">
+                <!-- El historial aparecerá aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIONES Y MODALES -->
+    <div id="toast" class="toast-notification">
+        <span id="toastIcon" class="toast-icon">✅</span>
+        <span id="toastMsg" class="toast-msg">Mensaje de éxito</span>
+    </div>
+
+    <div id="confirmOverlay" class="confirm-overlay">
+        <div class="confirm-modal">
+            <span id="confirmIcon" class="confirm-icon">🗑️</span>
+            <h3 id="confirmTitle" class="confirm-title">¿Estás seguro?</h3>
+            <p id="confirmText" class="confirm-text">Esta acción no se puede deshacer.</p>
+            <div class="confirm-btns">
+                <button class="btn btn-outline" onclick="closeConfirmModal()">Cancelar</button>
+                <button id="confirmActionBtn" class="btn btn-primary"
+                    style="background:#ef4444; border-color:#ef4444;">Eliminar permanentemente</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts: main.js first (has apiRequest), then auth, then panel -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/panel-arrendador.js"></script>
+</body>
+
+</html>

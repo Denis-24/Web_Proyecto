@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajustes – Roomie</title>
+    <script>
+        // Evita el destello inicial del cambio de color
+        const savedTheme = localStorage.getItem('roomie_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        .settings-page {
+            padding-top: 140px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+            background: transparent;
+        }
+
+        .settings-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .settings-sidebar {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 24px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+            position: sticky;
+            top: 120px;
+        }
+
+        .settings-menu-item {
+            display: block;
+            padding: 16px 32px;
+            color: var(--gray-500);
+            font-weight: 600;
+            transition: all var(--transition);
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .settings-menu-item:hover {
+            color: var(--teal);
+            background: var(--gray-100);
+        }
+
+        .settings-menu-item.active {
+            color: var(--teal-dark);
+            background: var(--teal-pale);
+            border-left-color: var(--teal);
+        }
+
+        .settings-content {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-100);
+            min-height: 400px;
+        }
+
+        .settings-title {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .settings-subtitle {
+            color: var(--gray-500);
+            margin-bottom: 40px;
+        }
+
+        /* Toggle Switch */
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .setting-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--dark);
+        }
+
+        .setting-info p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gray-300);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "☀️";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+        }
+
+        input:checked + .slider {
+            background-color: var(--teal);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+            content: "🌙";
+            background-color: var(--dark);
+        }
+
+        @media (max-width: 900px) {
+            .settings-layout {
+                grid-template-columns: 1fr;
+            }
+            .settings-sidebar {
+                position: relative;
+                top: 0;
+            }
+            .settings-content {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="Roomie" class="logo-img" />
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="buscar.html" class="nav-link">Buscar</a></li>
+                <li id="navAuth">
+                    <!-- Session gets injected by main.js -->
+                </li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- SETTINGS PAGE -->
+    <div class="settings-page container">
+        <div class="settings-layout">
+            
+            <!-- Sidebar -->
+            <div class="settings-sidebar">
+                <div class="settings-menu-item active" onclick="switchTab('apariencia')">
+                    🎨 Apariencia
+                </div>
+                <div class="settings-menu-item" onclick="switchTab('cuenta')">
+                    👤 Mi Cuenta
+                </div>
+                <div class="settings-menu-item" onclick="switchTab('notificaciones')">
+                    🔔 Notificaciones
+                </div>
+                <div class="settings-menu-item" onclick="switchTab('privacidad')">
+                    🔒 Privacidad
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="settings-content">
+                
+                <!-- Tab: Apariencia -->
+                <div id="tab-apariencia" class="tab-content">
+                    <h2 class="settings-title">Apariencia</h2>
+                    <p class="settings-subtitle">Personaliza cómo se ve y siente Roomie en tu dispositivo.</p>
+                    
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <h4>Modo Oscuro</h4>
+                            <p>Cambia el esquema de colores a un modo oscuro elegante que descansa tus ojos y ahorra energía.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <h4>Reducir Animaciones</h4>
+                            <p>Desactiva el movimiento de las tarjetas y el fondo si prefieres una experiencia estática.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Tab: Mocks para otras tabs -->
+                <div id="tab-cuenta" class="tab-content" style="display:none;">
+                    <h2 class="settings-title">Mi Cuenta</h2>
+                    <p class="settings-subtitle">Gestiona tu información personal y credenciales.</p>
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <h4>Configuración de perfil</h4>
+                            <p>Administra tu email y contraseña. (Proximamente)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-notificaciones" class="tab-content" style="display:none;">
+                    <h2 class="settings-title">Notificaciones</h2>
+                    <p class="settings-subtitle">Elige qué avisos quieres recibir en tu correo electrónico.</p>
+                    <div class="setting-row">
+                        <div class="setting-info">
+                            <h4>Avisos de nuevos inquilinos</h4>
+                            <p>Recibe un email cuando alguien te contacte por una habitación.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="tab-privacidad" class="tab-content" style="display:none;">
+                    <h2 class="settings-title">Privacidad</h2>
+                    <p class="settings-subtitle">Gestiona tus datos y preferencias de cookies.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Roomie España. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script>
+        // Logica simple para las pestañas de ajustes
+        function switchTab(tabId) {
+            // Eliminar activo de todos los items
+            document.querySelectorAll('.settings-menu-item').forEach(el => el.classList.remove('active'));
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            
+            // Activar el correspondiente
+            event.currentTarget.classList.add('active');
+            document.getElementById('tab-' + tabId).style.display = 'block';
+        }
+
+        // Lógica del modo oscuro usando la función de main.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('darkModeToggle');
+            
+            // Revisa el estado actual al cargar
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            toggleBtn.checked = currentTheme === 'dark';
+            
+            // Agrega el evento de cambio
+            toggleBtn.addEventListener('change', () => {
+                const newTheme = toggleTheme(); // función alojada en main.js
+                showToast(`Modo ${newTheme === 'dark' ? 'oscuro' : 'claro'} activado`, 'success');
+            });
+        });
+    </script>
+</body>
+
+</html>

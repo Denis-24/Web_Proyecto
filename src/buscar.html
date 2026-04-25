@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscar habitaciones – Roomie</title>
+    <meta name="description"
+        content="Busca habitaciones disponibles por zonas universitarias. Filtra por precio, características y más en Roomie." />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="Roomie" class="logo-img" />
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
+                <li><a href="buscar.html" class="nav-link active">Buscar</a></li>
+                <li id="navAuth">
+                    <a href="login.html" class="btn btn-outline">Iniciar sesión</a>
+                    <a href="registro.html" class="btn btn-primary" style="margin-left:8px;">Registrarse</a>
+                </li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- SEARCH PAGE -->
+    <div class="search-page">
+
+        <!-- Search Header -->
+        <div class="search-header">
+            <div class="container">
+                <h1>Buscar habitaciones</h1>
+                <p>Encuentra tu habitación ideal en zonas universitarias y más</p>
+                <div class="search-filters-bar">
+                    <input type="text" id="searchQuery" class="filter-input"
+                        placeholder="🔍 Ciudad, barrio, universidad..." style="flex:1;min-width:200px;" />
+                    <select class="filter-input" id="filterPrecio">
+                        <option value="">💰 Precio máximo</option>
+                        <option value="300">Hasta 300€/mes</option>
+                        <option value="400">Hasta 400€/mes</option>
+                        <option value="500">Hasta 500€/mes</option>
+                        <option value="700">Hasta 700€/mes</option>
+                        <option value="1000">Hasta 1.000€/mes</option>
+                    </select>
+                    <select class="filter-input" id="filterTipo">
+                        <option value="">🏠 Tipo</option>
+                        <option value="individual">Individual</option>
+                        <option value="compartida">Compartida</option>
+                        <option value="estudio">Estudio</option>
+                    </select>
+                    <select class="filter-input" id="filterOpciones">
+                        <option value="">✨ Opciones</option>
+                        <option value="wifi">Wifi incluido</option>
+                        <option value="mascotas">Mascotas OK</option>
+                        <option value="empadronamiento">Empadronamiento</option>
+                        <option value="amueblada">Amueblada</option>
+                    </select>
+                    <button class="btn btn-yellow" id="searchBtn" onclick="aplicarFiltros()">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div style="background:var(--white);border-bottom:1px solid var(--gray-100);padding:14px 24px;">
+            <span id="resultsCount" style="font-size:0.9rem;color:var(--gray-500);font-weight:500;">
+                Mostrando <strong id="numResults">8</strong> habitaciones disponibles
+            </span>
+            <span style="margin:0 12px;color:var(--gray-300)">|</span>
+            <span style="font-size:0.85rem;color:var(--gray-500)">Ordenar por:</span>
+            <select id="sortSelect" onchange="sortResults(this.value)"
+                style="border:none;background:transparent;font-family:var(--font);font-size:0.85rem;color:var(--teal);font-weight:600;cursor:pointer;margin-left:4px;">
+                <option value="relevancia">Relevancia</option>
+                <option value="precio-asc">Precio: menor primero</option>
+                <option value="precio-desc">Precio: mayor primero</option>
+                <option value="reciente">Más recientes</option>
+            </select>
+        </div>
+
+        <!-- Layout: Lista + Mapa -->
+        <div class="search-layout">
+
+            <!-- PANEL IZQUIERDO: Lista de habitaciones -->
+            <div class="rooms-panel" id="roomsPanel">
+                <!-- Las tarjetas se generan por JS -->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL: Detalle habitación -->
+    <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal(event)">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Detalles de la habitación</h3>
+                <button class="modal-close" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/buscar.js"></script>
+</body>
+
+</html>
